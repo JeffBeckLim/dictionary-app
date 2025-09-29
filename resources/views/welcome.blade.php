@@ -9,5 +9,25 @@
     </head>
     <body>
        <h1>Welcome to Stunna Dictionary</h1>
+
+       <script>
+        console.log(@json($words));
+       </script>
+
+       <ul>
+            @foreach($words as $word)
+                <li>
+                    <strong>{{ $word->word }}</strong>
+                    @if($word->pronunciation)
+                        ({{ $word->pronunciation }})
+                    @endif
+                    <br>
+                    {{ $word->definition }}
+                    <br>
+                    <em>{{ $word->part_of_speech }}</em>
+                </li>
+            @endforeach
+        </ul>
+
     </body>
 </html>
