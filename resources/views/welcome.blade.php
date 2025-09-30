@@ -17,56 +17,16 @@
        <div id="word-details"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    
+    {{-- public/js/searchWord.js --}}
     <script>
-    $(document).ready(function(){
-        $('#search').on('keyup', function(){
-            let query = $(this).val();
-            if(query.length > 1){
-                $.ajax({
-                    url: "{{ route('search') }}",
-                    type: "GET",
-                    data: { query: query },
-                    success: function(data){
-                        let suggestions = '';
-                        data.forEach(item => {
-                            console.log(item)
-                            suggestions += '<div class="suggestion-item" data-id="'+item.id+'">'+item.word+'</div>';
-                        });
-                        $('#suggestions').html(suggestions);
-                    }
-                });
-            } else {
-                $('#suggestions').html('');
-            }
-        });
-
-        // Click suggestion -> Display Word Details
-        $(document).on('click', '.suggestion-item', function(){
-            let wordId = $(this).data('id');
-            let word = $(this).text();
-
-            $('#search').val(word);
-            $('#suggestions').html('');
-
-            // Fetch word  details
-            $.ajax({
-                url: "/word/" + wordId,
-                type: "GET",
-                success: function(word){
-
-                    console.log(word)
-                    $('#word-details').html(
-                        "<p><strong>ID:</strong> " + word.id + "</p>" +
-                        "<p><strong>Name:</strong> " + word.word + "</p>" +
-                        "<p><strong>Email:</strong> " + word.definition + "</p>"
-                    );
-                }
-            });
-        });
-        
-    });
+        // Pass routes into JavaScript variables
+        const searchRoute = "{{ route('search') }}";
+        const wordDetailRoute = "{{ route('word.details', ':id') }}"; // placeholder
     </script>
-
+    {{-- JS CODE FOR SEARCH --}}
+    <script src="{{ asset('js/searchWord.js') }}"></script>
 
     {{-- Display Words from DB --}}
 
