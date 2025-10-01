@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('pronunciation')->nullable();
             $table->text('definition')->nullable();
             $table->string('part_of_speech')->nullable();
+            
             $table->timestamps();
         });
     }

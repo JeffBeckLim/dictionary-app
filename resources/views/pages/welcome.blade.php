@@ -1,20 +1,12 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.layout')
 
-        <title>{{ config('app.name', 'Dictionay App') }}</title>
+@section('content')
+    <h2>Welcome</h2>
 
-    </head>
-    <body>
-       <h1>Aklan Dictionary</h1>
-
-
-       <input type="text" id="search" placeholder="Search..." autocomplete="off">
-       
-       <div style="border: 1px solid black; max-width: 150px;" id="suggestions"></div>
-       <div id="word-details"></div>
+    <input type="text" id="search" placeholder="Search..." autocomplete="off">
+    
+    <div style="border: 1px solid black; max-width: 150px;" id="suggestions"></div>
+    <div id="word-details"></div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
@@ -23,13 +15,12 @@
     <script>
         // Pass routes into JavaScript variables
         const searchRoute = "{{ route('search') }}";
-        const wordDetailRoute = "{{ route('word.details', ':id') }}"; // placeholder
+        const wordDetailRoute = "{{ route('word.details', ':id') }}";
     </script>
-    {{-- JS CODE FOR SEARCH --}}
+    {{-- search logic display --}}
     <script src="{{ asset('js/searchWord.js') }}"></script>
 
     {{-- Display Words from DB --}}
-
     <h4>Words in Database:</h4>
     <ul>
         @foreach($words as $word)
@@ -45,6 +36,4 @@
             </li>
         @endforeach
     </ul>
-
-    </body>
-</html>
+@endsection

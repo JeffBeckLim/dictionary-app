@@ -10,6 +10,6 @@ class WordController extends Controller
      public function index()
     {
         $words = Word::all();
-        return view('welcome', compact('words'));
+        return view('pages.welcome', compact('words'));
     }
 }
