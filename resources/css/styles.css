@@ -1,0 +1,134 @@
+/* Reset & Base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  color: #2e5942;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 1rem;
+  z-index: 2;
+  position: relative;
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+
+.search-box {
+  background-color: #e8f5e9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.search-box h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.search-input {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.search-input input {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #2e5942;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search-input button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  background-color: #2e5942;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-input button:hover {
+  background-color: #1e402f;
+}
+
+.suggestion {
+  font-size: 0.875rem;
+  color: #4b7a5a;
+}
+
+.word-box {
+  background-color: #ecfdf5;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.word {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.pronunciation {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+.sound-icon {
+  margin-left: 0.5rem;
+  cursor: pointer;
+}
+
+.definition-box {
+  background-color: #e8f5e9;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.part-of-speech {
+  font-weight: 600;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.definition-box p {
+  margin-bottom: 0.75rem;
+}
+
+.example {
+  font-style: italic;
+  color: #3e7a5f;
+}
+
+/* Background Pattern */
+.background-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  opacity: 0.1;
+  z-index: 0;
+  background-repeat: repeat;
+}
