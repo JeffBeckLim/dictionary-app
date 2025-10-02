@@ -13,6 +13,7 @@ use App\Http\Controllers\{
 Route::get('/', [WordController::class, 'index'])->name('home');
 
 
+
 // **** CONTRIBUTOR ROUTE ****
 Route::get('/word/create', [CreateController::class, 'index'])->name('contribute');
 Route::post('/word/store', [CreateController::class, 'store'])->name('word.store');

@@ -1,31 +1,33 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h2>Import to the Dictionary</h2>
+    <div class="card shadow-sm border-success mb-5">
+        <div class="card-body">
+            <h2 class="card-title fw-bold text-success">Import to the Dictionary</h2>
 
-    @if(session('success'))
-        <h4 style="color:green">{{ session('success') }}</h4>
-    @endif
-    
-    <form action="{{ route('word.import.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        
-        <div>
-            <label for="file">Choose CSV File:</label>
-            <input type="file" id="file" name="file" accept=".csv" required>
+            @if(session('success'))
+                <div class="alert alert-success mt-3">{{ session('success') }}</div>
+            @endif
+
+            <form action="{{ route('word.import.store') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+                @csrf
+
+                <div class="mb-3">
+                    <label for="file" class="form-label">Choose CSV File</label>
+                    <input type="file" id="file" name="file" class="form-control border-success" accept=".csv" required>
+                </div>
+
+                <button type="submit" class="btn btn-success">Import Words</button>
+            </form>
+
+            <div class="mt-4">
+                <h5>CSV Format</h5>
+                <a href="{{ asset('samples/sample_csv_format.csv') }}" class="link-success" download>
+                    Download Sample CSV File
+                </a>
+                <p class="mt-2 text-muted">Your CSV file should have these columns:</p>
+                <code>word,pronunciation,part_of_speech,definition</code>
+            </div>
         </div>
-
-        <div style="margin-top: 10px;">
-            <button type="submit">Import Words</button>
-        </div>
-    </form>
-
-    <div style="margin-top: 20px;">
-        <h3>CSV Format:</h3>
-        <a href="{{ asset('samples/sample_csv_format.csv') }}" download style="color: blue; text-decoration: underline;">
-            Download Sample CSV File
-        </a>
-        <p>Your CSV file should have these columns (first row as headers):</p>
-        <code>word,pronunciation,part_of_speech,definition</code>
     </div>
 @endsection

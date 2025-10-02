@@ -7,9 +7,15 @@ use App\Models\Word;
 
 class WordController extends Controller
 {
-     public function index()
+    public function index()
     {
         $words = Word::all();
-        return view('pages.welcome', compact('words'));
+
+        // Get 4 random suggestions
+        $suggestedWords = Word::inRandomOrder()->limit(4)->get();
+
+        
+        return view('pages.welcome', compact('words', 'suggestedWords'));
     }
+
 }
