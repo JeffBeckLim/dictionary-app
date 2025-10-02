@@ -11,7 +11,10 @@
             <input type="text" id="search" class="form-control border-success" placeholder="Search..." autocomplete="off">
             <button class="btn btn-success" type="button">Search</button>
         </div>
-
+        {{-- Suggestions (from search) --}}
+        <div class="text-left">
+            <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px;"></div>
+        </div>
         {{-- Suggested Words --}}
         @if(!empty($suggestedWords) && count($suggestedWords) > 0)
             <div class="form-text text-success mt-2">
@@ -24,10 +27,11 @@
     </div>
 
     {{-- Suggestions (from search) --}}
-    <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px; display: none;"></div>
+    <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px;"></div>
 
     {{-- Word Details loaded via AJAX --}}
     <div id="word-details" class="mt-5"></div>
+
 
     {{-- Word List from DB --}}
     <h3 class="fw-bold text-success mt-5 mb-3">Words in Database</h3>

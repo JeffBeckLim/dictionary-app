@@ -32,14 +32,25 @@ $(document).ready(function(){
         $.ajax({
             url: wordDetailRoute.replace(':id', wordId),
             type: "GET",
-            success: function(word){
-
-                console.log(word)
-                $('#word-details').html(
-                    "<p><strong>ID:</strong> " + word.id + "</p>" +
-                    "<p><strong>Name:</strong> " + word.word + "</p>" +
-                    "<p><strong>Email:</strong> " + word.definition + "</p>"
-                );
+            success: function (word) {
+                $('#word-details').html(`
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-6">
+                            <div class="card border-success shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title text-success">
+                                        ${word.word}
+                                        ${word.pronunciation ? `<small class="text-muted">(${word.pronunciation})</small>` : ''}
+                                    </h5>
+                                    <p class="card-text">${word.definition}</p>
+                                    <span class="badge bg-success-subtle text-success fw-semibold text-capitalize">
+                                        ${word.part_of_speech}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
             }
         });
     });
