@@ -15,9 +15,15 @@ Master Layout
 </head>
 <body>
     <h1>Aklanon Dictionary</h1>
+    
+    @if (Auth::check())
+        <p>Logged in User: {{ Auth::user()->email }}</p>
+    @endif
+    
     <a href="{{ route('home') }}">Home</a> |
     <a href="{{ route('contribute') }}">Contribute</a> | 
     <a href="{{ route('import') }}">Import</a>
+    
     @yield('content')
 </body>
 </html>
