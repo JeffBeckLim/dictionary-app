@@ -13,13 +13,13 @@ use App\Http\Controllers\{
 Route::get('/', [WordController::class, 'index'])->name('home');
 
 
-
-// **** CONTRIBUTOR ROUTE ****
-Route::get('/word/create', [CreateController::class, 'index'])->name('contribute');
-Route::post('/word/store', [CreateController::class, 'store'])->name('word.store');
-Route::get('/word/import', [ImportController::class, 'index'])->name('import');
-Route::post('/word/import/store', [ImportController::class, 'import'])->name('word.import.store');
-
+Route::middleware(['auth'])->group(function () {
+    // **** CONTRIBUTOR ROUTE ****
+    Route::get('/word/create', [CreateController::class, 'index'])->name('contribute');
+    Route::post('/word/store', [CreateController::class, 'store'])->name('word.store');
+    Route::get('/word/import', [ImportController::class, 'index'])->name('import');
+    Route::post('/word/import/store', [ImportController::class, 'import'])->name('word.import.store');
+});
 
 // **** WORD SEARCH ROUTE ****
 Route::get('/search', [SearchController::class, 'search'])->name('search');

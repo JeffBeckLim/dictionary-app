@@ -4,6 +4,21 @@
 
     {{-- Page Heading --}}
     <div class="text-center mb-5">
+        @auth
+            <h4 class="text-success fw-bold">Welcome, {{ Auth::user()->name }}!</h4>
+
+            
+        @endauth
+        
+
+        @auth
+    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">
+            Logout
+        </button>
+    </form>
+@endauth
         <h2 class="display-6 fw-bold text-success">What Word Piques Your Interest?</h2>
 
         {{-- Search Box --}}
@@ -24,7 +39,7 @@
     </div>
 
     {{-- Suggestions (from search) --}}
-    <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px; display: none;"></div>
+    <div id="suggestions" class="list-group mx-auto mb-4 border " style="max-width: 500px; display: none;"></div>
 
     {{-- Word Details loaded via AJAX --}}
     <div id="word-details" class="mt-5"></div>
