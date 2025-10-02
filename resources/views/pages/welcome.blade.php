@@ -4,6 +4,18 @@
 
     {{-- Page Heading --}}
     <div class="text-center mb-5">
+        @auth
+            <h4 class="text-success fw-bold">Welcome, {{ Auth::user()->name }}!</h4>
+        @endauth
+        
+        @auth
+    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+        @csrf
+        <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">
+            Logout
+        </button>
+    </form>
+@endauth
         <h2 class="display-6 fw-bold text-success">What Word Piques Your Interest?</h2>
 
         {{-- Search Box --}}
@@ -22,14 +34,32 @@
             <div class="form-text text-success mt-2">
                 Suggested:
                 @foreach($suggestedWords as $suggested)
-                    <span class="badge bg-success-subtle text-success me-1">{{ $suggested->word }}</span>
+                    <span 
+                        class="badge bg-success-subtle text-success me-1 suggested-word"
+                        data-id="{{ $suggested->id }}"
+                        style="cursor: pointer;"
+                    >
+                        {{ $suggested->word }}
+                    </span>
                 @endforeach
             </div>
         @endif
+
+        {{-- Inline hover style --}}
+        <style>
+            .suggested-word {
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .suggested-word:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 8px rgba(40, 167, 69, 0.4); /* subtle green glow */
+            }
+        </style>
+
+
     </div>
 
-    {{-- Suggestions (from search) --}}
-    <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px;"></div>
 
     {{-- Word Details loaded via AJAX --}}
     <div id="word-details" class="mt-5"></div>

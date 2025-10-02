@@ -59,7 +59,7 @@ $(document).ready(function () {
                 $wordDetails.html(`
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-6">
-                            <div class="card border-success shadow-sm">
+                            <div class="card border-success shadow-sm" style="background-color:#E2FED6;">
                                 <div class="card-body">
                                     <h5 class="card-title text-success">
                                         ${word.word}
@@ -80,6 +80,44 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Click on suggested word → Fetch word details
+    $(document).on('click', '.suggested-word', function () {
+        let wordId = $(this).data('id');
+        let word = $(this).text();
+
+        $search.val(word);
+        $suggestions.hide().html('');
+
+        $.ajax({
+            url: wordDetailRoute.replace(':id', wordId),
+            type: "GET",
+            success: function (word) {
+                $wordDetails.html(`
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-md-6">
+                            <div class="card border-success shadow-sm" style="background-color:#E2FED6;">
+                                <div class="card-body">
+                                    <h5 class="card-title text-success">
+                                        ${word.word}
+                                        ${word.pronunciation ? `<small class="text-muted">(${word.pronunciation})</small>` : ''}
+                                    </h5>
+                                    <p class="card-text">${word.definition}</p>
+                                    <span class="badge bg-success-subtle text-success fw-semibold text-capitalize">
+                                        ${word.part_of_speech}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `);
+            },
+            error: function () {
+                $wordDetails.html('<p class="text-danger">Failed to load word details.</p>');
+            }
+        });
+    });
+
 
     // Hide suggestions when clicking outside
     $(document).on('click', function (e) {
