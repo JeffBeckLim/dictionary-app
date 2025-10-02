@@ -7,14 +7,16 @@
         <h2 class="display-6 fw-bold text-success">What Word Piques Your Interest?</h2>
 
         {{-- Search Box --}}
-        <div class="input-group mt-4 mx-auto" style="max-width: 500px;">
-            <input type="text" id="search" class="form-control border-success" placeholder="Search..." autocomplete="off">
-            <button class="btn btn-success" type="button">Search</button>
+        <div class="position-relative mt-4 mx-auto" style="max-width: 500px;">
+            <div class="input-group">
+                <input type="text" id="search" class="form-control border-success" placeholder="Search..." autocomplete="off">
+                <button class="btn btn-success" type="button">Search</button>
+            </div>
+
+            {{-- Suggestions Dropdown --}}
+            <div id="suggestions" class="dropdown-menu w-100 shadow" style="display: none;"></div>
         </div>
-        {{-- Suggestions (from search) --}}
-        <div class="text-left">
-            <div id="suggestions" class="list-group mx-auto mb-4" style="max-width: 500px;"></div>
-        </div>
+
         {{-- Suggested Words --}}
         @if(!empty($suggestedWords) && count($suggestedWords) > 0)
             <div class="form-text text-success mt-2">

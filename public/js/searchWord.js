@@ -1,39 +1,62 @@
-$(document).ready(function(){
-    $('#search').on('keyup', function(){
-        let query = $(this).val();
-        if(query.length > 1){
+$(document).ready(function () {
+    const $search = $('#search');
+    const $suggestions = $('#suggestions');
+    const $wordDetails = $('#word-details');
+
+    // Trigger search on keyup
+    $search.on('keyup', function () {
+        let query = $(this).val().trim();
+
+        if (query.length > 1) {
             $.ajax({
                 url: searchRoute,
                 type: "GET",
                 data: { query: query },
-                success: function(data){
-                    let suggestions = '';
-                    data.forEach(item => {
-                        console.log(item)
-                        suggestions += '<div class="suggestion-item" data-id="'+item.id+'">'+item.word+'</div>';
-                    });
-                    $('#suggestions').html(suggestions);
+                success: function (data) {
+                    if (data.length > 0) {
+                        let suggestions = '';
+
+                        data.forEach(item => {
+                            suggestions += `
+                                <button type="button" class="dropdown-item suggestion-item text-start" data-id="${item.id}">
+                                    ${item.word}
+                                </button>
+                            `;
+                        });
+
+                        $suggestions
+                            .html(suggestions)
+                            .show();
+                    } else {
+                        $suggestions
+                            .html('<span class="dropdown-item text-muted disabled">No matches found</span>')
+                            .show();
+                    }
+                },
+                error: function () {
+                    $suggestions
+                        .html('<span class="dropdown-item text-danger disabled">Error fetching suggestions</span>')
+                        .show();
                 }
             });
         } else {
-            $('#suggestions').html('');
+            $suggestions.hide().html('');
         }
     });
 
-    // Click suggestion -> Display Word Details
-    $(document).on('click', '.suggestion-item', function(){
+    // Click suggestion → Fetch word details
+    $(document).on('click', '.suggestion-item', function () {
         let wordId = $(this).data('id');
         let word = $(this).text();
 
-        $('#search').val(word);
-        $('#suggestions').html('');
+        $search.val(word);
+        $suggestions.hide().html('');
 
-        // Fetch word  details
         $.ajax({
             url: wordDetailRoute.replace(':id', wordId),
             type: "GET",
             success: function (word) {
-                $('#word-details').html(`
+                $wordDetails.html(`
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-6">
                             <div class="card border-success shadow-sm">
@@ -51,8 +74,17 @@ $(document).ready(function(){
                         </div>
                     </div>
                 `);
+            },
+            error: function () {
+                $wordDetails.html('<p class="text-danger">Failed to load word details.</p>');
             }
         });
     });
-    
+
+    // Hide suggestions when clicking outside
+    $(document).on('click', function (e) {
+        if (!$(e.target).closest('#search, #suggestions').length) {
+            $suggestions.hide();
+        }
+    });
 });
