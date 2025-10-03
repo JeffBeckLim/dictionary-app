@@ -96,11 +96,26 @@ $(document).ready(function () {
                 $wordDetails.html(`
                     <div class="row justify-content-center mt-4">
                         <div class="col-md-6">
-                            <div class="card border-success shadow-sm" style="background-color:#E2FED6;">
+                            <div class="card border-success shadow-sm position-relative" style="background-color:#E2FED6;">
+                                
+                                <!-- Close Button -->
+                                <button type="button"
+                                        class="btn-close position-absolute top-0 end-0 m-3 fs-6"
+                                        aria-label="Close"
+                                        id="close-word-details">
+                                </button>
+                                
                                 <div class="card-body">
                                     <h5 class="card-title text-success">
                                         ${word.word}
                                         ${word.pronunciation ? `<small class="text-muted">(${word.pronunciation})</small>` : ''}
+                                        <button
+                                            id="play-pronunciation"
+                                            title="Play Pronunciation"
+                                            style="background: none; border: none; color: #198754; font-size: 1.2rem; cursor: pointer;"
+                                        >
+                                            🔊
+                                        </button>
                                     </h5>
                                     <p class="card-text">${word.definition}</p>
                                     <span class="badge bg-success-subtle text-success fw-semibold text-capitalize">
@@ -117,6 +132,12 @@ $(document).ready(function () {
             }
         });
     });
+
+    // Handle close button for word detail card
+    $(document).on('click', '#close-word-details', function () {
+        $('#word-details').empty();
+    });
+
 
 
     // Hide suggestions when clicking outside

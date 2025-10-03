@@ -11,7 +11,7 @@
         @auth
     <form method="POST" action="{{ route('logout') }}" style="display: inline;">
         @csrf
-        <button type="submit" style="background: none; border: none; color: blue; text-decoration: underline; cursor: pointer;">
+        <button type="submit" class="btn btn-warning text-success btn-sm">
             Logout
         </button>
     </form>
@@ -21,7 +21,7 @@
         {{-- Search Box --}}
         <div class="position-relative mt-4 mx-auto" style="max-width: 500px;">
             <div class="input-group">
-                <input type="text" id="search" class="form-control border-success" placeholder="Search..." autocomplete="off">
+                <input type="text" id="search" class="form-control border-success text-start" placeholder="Search..." autocomplete="off">
                 <button class="btn btn-success" type="button">Search</button>
             </div>
 
