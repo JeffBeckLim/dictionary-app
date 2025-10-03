@@ -1,27 +1,37 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('layouts.layout')
+
+@section('content')
+    <div class="text-center mb-5">
+        <h2 class="display-6 fw-bold text-success">Confirm Password</h2>
+        <p class="text-muted">
+            This is a secure area of the application. Please confirm your password before continuing.
+        </p>
     </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
+    <div class="mx-auto" style="max-width: 500px;">
+        <form method="POST" action="{{ route('password.confirm') }}" class="border p-4 rounded shadow-sm">
+            @csrf
 
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
+            <!-- Password Field -->
+            <div class="mb-3">
+                <label for="password" class="form-label text-success">{{ __('Password') }}</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       class="form-control border-success @error('password') is-invalid @enderror"
+                       required autocomplete="current-password">
+                @error('password')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+            <!-- Submit Button -->
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success">
+                    {{ __('Confirm') }}
+                </button>
+            </div>
+        </form>
+    </div>
+    
+@endsection
