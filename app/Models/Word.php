@@ -10,6 +10,7 @@ class Word extends Model
         'word', 
         'pronunciation', 
         'definition', 
-        'part_of_speech'
+        'part_of_speech',
+        'recording_path'
     ];
 }
