@@ -1,34 +1,66 @@
 @extends('layouts.layout')
 
 @section('content')
-    <h1>Record Audio</h1>
-
-
-    <h1>Record Pronunciation for: {{ $word->word }}</h1>
-
-    <p><strong>Definition:</strong> {{ $word->definition }}</p>
-    <p><strong>Part of Speech:</strong> {{ $word->part_of_speech }}</p>
-
-    @if($word->recording_path)
-        <div>
-            <h3>Current Recording:</h3>
-            <audio controls src="{{ Storage::url($word->recording_path) }}"></audio>
+<div class="container my-5">
+    <div class="card border-success shadow-sm">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Record Pronunciation</h4>
         </div>
-    @endif
+        <div class="card-body">
 
-    <hr>
+            <h5 class="text-success">Word: <strong>{{ $word->word }}</strong></h5>
 
-    <div id="message"></div>
+            <p class="mb-1"><strong>Definition:</strong> {{ $word->definition }}</p>
+            <p class="mb-3"><strong>Part of Speech:</strong> 
+                <span class="badge bg-success-subtle text-success text-capitalize">
+                    {{ $word->part_of_speech }}
+                </span>
+            </p>
 
-    <button id="startRecord" type="button">Start Recording</button>
-    <button id="stopRecord" type="button" disabled>Stop Recording</button>
-    <button id="saveRecord" type="button" disabled>Save Recording</button>
+            @if($word->recording_path)
+                <div class="mb-4">
+                    <h6>Current Recording:</h6>
+                    <audio controls class="w-100">
+                        <source src="{{ Storage::url($word->recording_path) }}" type="audio/webm">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            @endif
 
-    <p id="status">Ready</p>
+            <hr>
 
-    <div id="audioPlayback"></div>
+            <div id="message" class="mb-3 text-danger fw-semibold"></div>
 
-    {{-- <a href="{{ route('word.details', $word->id) }}">Back to Word</a> --}}
+            <div class="mb-3 d-flex flex-wrap gap-2">
+                <button id="startRecord" class="btn btn-outline-success">
+                    🎙️ Start Recording
+                </button>
+                <button id="stopRecord" class="btn btn-outline-warning" disabled>
+                    ⏹️ Stop
+                </button>
+                <button id="saveRecord" class="btn btn-outline-primary" disabled>
+                    💾 Save
+                </button>
+            </div>
+
+            <p id="status" class="form-text text-muted">Ready</p>
+
+            <div id="audioPlayback" class="mt-3"></div>
+
+            <a href="{{ route('word.details', $word->id) }}" class="btn btn-link mt-4">← Back to Word</a>
+        </div>
+    </div>
+</div>
+
+{{-- Optional Hover Effects --}}
+<style>
+    button:enabled:hover {
+        transform: scale(1.05);
+        transition: 0.2s ease;
+    }
+</style>
+
+    <!-- {{-- <a href="{{ route('word.details', $word->id) }}">Back to Word</a> --}} -->
 
     <script>
         let mediaRecorder;
