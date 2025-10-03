@@ -66,5 +66,10 @@ Master Layout
         @yield('content')
     </main>
 
+    {{-- Footer --}}
+    <footer class="text-center text-success py-3 mt-auto">
+        <small>&copy; {{ date('Y') }} Aklanon Dictionary. All rights reserved.</small>
+    </footer>
+
 </body>
 </html>
