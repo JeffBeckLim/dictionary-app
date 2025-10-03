@@ -35,13 +35,24 @@ $(document).ready(function(){
             success: function(word){
 
                 console.log(word)
+
+                  let audioHtml = '';
+            if(word.recording_path){
+                audioHtml = '<button onclick="playAudio(\'/storage/' + word.recording_path + '\')">▶ Play Pronunciation</button>';
+            }
                 $('#word-details').html(
                     "<p><strong>ID:</strong> " + word.id + "</p>" +
                     "<p><strong>Name:</strong> " + word.word + "</p>" +
-                    "<p><strong>Email:</strong> " + word.definition + "</p>"
+                    "<p><strong>Email:</strong> " + word.definition + "</p>"+
+                    (word.recording_path ? "<p><strong>Audio:</strong> " + audioHtml + "</p>" : "")
                 );
             }
         });
     });
     
 });
+
+function playAudio(audioPath){
+    let audio = new Audio(audioPath);
+    audio.play();
+}
