@@ -20,8 +20,8 @@
 
     <div id="message"></div>
 
-    <button id="startRecord">Start Recording</button>
-    <button id="stopRecord" disabled>Stop Recording</button>
+    <button id="startRecord" type="button">Start Recording</button>
+    <button id="stopRecord" type="button" disabled>Stop Recording</button>
     <button id="saveRecord" type="button" disabled>Save Recording</button>
 
     <p id="status">Ready</p>
@@ -102,7 +102,7 @@
                 });
 
                 const data = await response.json();
-                console.log(response);
+                console.log(data);
 
                 if (data.success) {
                     messageDiv.textContent = 'Recording saved successfully!';
@@ -119,7 +119,9 @@
 
             } catch (error) {
                 console.log(error);
-                messageDiv.textContent = 'Error saving recording';
+                console.error("Error details:", error);
+                console.error("Stack trace:", error.stack);
+                messageDiv.textContent = 'Error saving recording' + error.message;
                 saveButton.disabled = false;
             }
         });

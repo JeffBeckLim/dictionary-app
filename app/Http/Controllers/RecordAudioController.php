@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Word;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class RecordAudioController extends Controller
 {
@@ -13,12 +15,18 @@ class RecordAudioController extends Controller
         return view('pages.record', compact('word'));
     }
 
-
-   public function saveRecording(Request $request, $id)
+    public function saveRecording(Request $request, $id)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'audio' => 'required|file|mimes:wav,mp3,webm,ogg|max:10240'
         ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         $word = Word::findOrFail($id);
 
