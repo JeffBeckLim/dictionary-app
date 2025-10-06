@@ -21,7 +21,7 @@ class ManageController extends Controller
         }
 
         // Paginate results (10 per page)
-        $words = $query->latest()->paginate(10);
+        $words = $query->latest()->paginate(5);
 
         // Preserve search query in pagination links
         $words->appends(['search' => $search]);
