@@ -25,6 +25,8 @@ Master Layout
     {{-- Optional Fonts --}}
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
 
+    @vite(['resources/css/app.css'])
+
     <style>
         body {
             font-family: 'Nunito', sans-serif;
