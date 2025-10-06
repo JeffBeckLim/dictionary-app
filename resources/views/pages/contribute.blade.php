@@ -14,7 +14,7 @@
 
                 <div class="mb-3">
                     <label for="word" class="form-label">Word</label>
-                    <input type="text" id="word" name="word" class="form-control border-success" required>
+                    <input type="text" id="word" name="word" class="form-control border-success" required placeholder="e.g., aesthetic">
                 </div>
 
                 <div class="mb-3">

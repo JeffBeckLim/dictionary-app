@@ -10,11 +10,17 @@
             @endif
 
             {{-- Search form --}}
-            <form method="GET" action="{{ route('manage') }}" class="mb-3">
+            <form method="GET" action="{{ route('manage') }}" class="mb-3 position-relative">
                 <div class="input-group">
-                    <input type="text" name="search" class="form-control" placeholder="Search words..." value="{{ $search }}">
+                    <input type="text" id="search-input" name="search" class="form-control" placeholder="Search words..." value="{{ $search }}">
+                    @if(request('search'))
+                        <a href="{{ route('manage') }}" class="btn btn-outline-secondary">Clear</a>
+                    @endif
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </div>
+
+                {{-- Suggestions dropdown --}}
+                <div id="search-suggestions" class="dropdown-menu w-100 shadow-sm" style="position: absolute; top: 100%; z-index: 1000; display: none;"></div>
             </form>
 
             {{-- Add / Import Buttons --}}
@@ -91,5 +97,44 @@
         border-color: #198754;
     }
     </style>
+    
+    <script>
+        const input = document.getElementById('search-input');
+        const suggestionsBox = document.getElementById('search-suggestions');
+
+        input.addEventListener('input', function () {
+            const query = this.value.trim();
+
+            if (query.length < 2) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+
+            fetch(`{{ route('manage.suggest') }}?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    suggestionsBox.innerHTML = '';
+                    if (Object.keys(data).length) {
+                        for (const [id, word] of Object.entries(data)) {
+                            const item = document.createElement('a');
+                            item.href = `?search=${encodeURIComponent(word)}`;
+                            item.className = 'dropdown-item';
+                            item.textContent = word;
+                            suggestionsBox.appendChild(item);
+                        }
+                        suggestionsBox.style.display = 'block';
+                    } else {
+                        suggestionsBox.style.display = 'none';
+                    }
+                });
+        });
+
+        // Hide suggestions if clicking outside
+        document.addEventListener('click', function (e) {
+            if (!input.contains(e.target) && !suggestionsBox.contains(e.target)) {
+                suggestionsBox.style.display = 'none';
+            }
+        });
+    </script>
 
 @endsection

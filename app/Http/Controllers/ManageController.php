@@ -28,14 +28,28 @@ class ManageController extends Controller
 
         return view('pages.manage', compact('words', 'search'));
     }
-    // Show edit form
+
+    public function suggest(Request $request)
+    {
+        $query = $request->input('q');
+
+        if (!$query) {
+            return response()->json([]);
+        }
+
+        $suggestions = Word::where('word', 'like', '%' . $query . '%')
+            ->limit(5)
+            ->pluck('word', 'id');
+
+        return response()->json($suggestions);
+    }
+
     public function edit($id)
     {
         $word = Word::findOrFail($id);
         return view('pages.edit', compact('word'));
     }
 
-    // Handle update form
     public function update(Request $request, $id)
     {
         $word = Word::findOrFail($id);
@@ -51,4 +65,5 @@ class ManageController extends Controller
 
         return redirect()->route('manage')->with('success', 'Word updated successfully!');
     }
+
 }

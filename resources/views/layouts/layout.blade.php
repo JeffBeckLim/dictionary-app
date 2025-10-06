@@ -9,7 +9,10 @@ Master Layout
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Dictionary App') }}</title>
+    <title>
+        {{ ucfirst(str_replace('-', ' ', Route::currentRouteName())) ?? config('app.name', 'Aklanon Fishing Terms') }}
+    </title>
+
 
     {{-- Bootstrap 5 CSS --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +38,7 @@ Master Layout
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <a class="navbar-brand fw-bold text-success" href="{{ route('home') }}">
-                🌿 Aklanon Dictionary
+                🦈  Aklanon Fishing Terms
             </a>
 
             {{-- Hamburger Button --}}

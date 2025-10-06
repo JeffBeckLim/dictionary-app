@@ -47,7 +47,14 @@
 
             <div id="audioPlayback" class="mt-3"></div>
 
-            <a href="{{ route('word.details', $word->id) }}" class="btn btn-link mt-4">← Back to Word</a>
+            <!-- <a href="{{ route('word.details', $word->id) }}" class="btn btn-link mt-4">← Back to Word</a> -->
+            <a href="{{ route('manage', ['search' => $word->word]) }}" 
+            class="btn btn-sm btn-outline-success mt-4">
+                <!-- ← Back to Manage (Search: "{{ $word->word }}") -->
+                ← Back to Manage
+            </a>
+
+
         </div>
     </div>
 </div>
