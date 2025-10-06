@@ -59,6 +59,22 @@ Master Layout
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('manage') }}">Manage</a>
                     </li>
+                    @auth
+                        <li class="nav-item d-flex align-items-center">
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-outline-success">Logout</button>
+                            </form>
+                        </li>
+                    @endauth
+
+                    @guest
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="{{ route('login') }}" class="btn btn-sm btn-success ">Login</a>
+                        </li>
+                    @endguest
+
+
                 </ul>
             </div>
         </div>

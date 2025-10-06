@@ -43,7 +43,7 @@ h1 {
 
 .search-input {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }

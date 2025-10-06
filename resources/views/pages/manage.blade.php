@@ -26,6 +26,7 @@
             @if($words->isEmpty())
                 <p class="text-muted">No words found. Start by adding a new word.</p>
             @else
+            <div class="table-responsive"> 
                 <table class="table table-bordered table-hover">
                     <thead class="table-success">
                         <tr>
@@ -33,6 +34,7 @@
                             <th>Pronunciation</th>
                             <th>Part of Speech</th>
                             <th>Definition</th>
+                            <th>Audio</th>
                             <th class="text-center" style="width: 150px;">Actions</th>
                         </tr>
                     </thead>
@@ -40,11 +42,25 @@
                         @foreach($words as $word)
                             <tr>
                                 <td>{{ $word->word }}</td>
-                                <td>{{ $word->pronunciation ?? '-' }}</td>
+                                <td>\ {{ $word->pronunciation ?? '-' }} \</td>
                                 <td class="text-capitalize">{{ $word->part_of_speech }}</td>
                                 <td>{{ Str::limit($word->definition, 100) }}</td>
-                                <td class="text-center">
-                                    <a href="{{ route('word.edit', $word->id) }}" class="btn btn-sm btn-success mb-1">Edit</a>
+                                 <td>
+                                    @if($word->recording_path)
+                                        <audio controls style="width: 100px;">
+                                            <source src="{{ asset('storage/' . $word->recording_path) }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    @else
+                                        <span class="text-muted">No audio</span>
+                                    @endif
+                                </td>
+                                <td class="text-start">
+                                    <a href="{{ route('word.edit', $word->id) }}" class="btn btn-sm btn-success mb-1">Edit Word</a>
+                                    
+                                    <a href="{{ route('audio', $word->id) }}" class="btn btn-sm btn-outline-success mb-1">
+                                        {{ $word->recording_path ? 'Update Recording' : 'Add Recording' }}
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -55,6 +71,7 @@
                 <div class="d-flex justify-content-center">
                     {{ $words->links() }}
                 </div>
+            </div>
             @endif
         </div>
     </div>

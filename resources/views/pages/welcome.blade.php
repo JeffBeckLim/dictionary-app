@@ -7,15 +7,6 @@
         @auth
             <h4 class="text-success fw-bold">Welcome, {{ Auth::user()->name }}!</h4>
         @endauth
-        
-        @auth
-    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-        @csrf
-        <button type="submit" class="btn btn-warning text-success btn-sm">
-            Logout
-        </button>
-    </form>
-@endauth
         <h2 class="display-6 fw-bold text-success">What Word Piques Your Interest?</h2>
 
         {{-- Search Box --}}
