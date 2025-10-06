@@ -71,21 +71,21 @@ Master Layout
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ Route::is('home') ? 'fw-bold text-success' : '' }}" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('contribute') }}">Contribute</a>
+                        <a class="nav-link {{ Route::is('contribute') ? 'fw-bold text-success' : '' }}" href="{{ route('contribute') }}">Contribute</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('import') }}">Import</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('manage') }}">Manage</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">+ Account</a>
+                        <a class="nav-link {{ Route::is('import') ? 'fw-bold text-success' : '' }}" href="{{ route('import') }}">Import</a>
                     </li>
                     @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('manage') ? 'fw-bold text-success' : '' }}" href="{{ route('manage') }}">Manage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('register') ? 'fw-bold text-success' : '' }}" href="{{ route('register') }}">Accounts</a>
+                    </li>
                         <li class="nav-item d-flex align-items-center">
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
