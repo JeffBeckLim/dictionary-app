@@ -24,6 +24,9 @@ class ImportController extends Controller
         
         // Remove header row
         $header = array_shift($csvData);
+
+        
+        $validated['user_id'] = $request->user()->id;
         
         foreach ($csvData as $row) {
             Word::create([
@@ -31,6 +34,7 @@ class ImportController extends Controller
                 'pronunciation' => $row[1] ?? null,
                 'part_of_speech' => $row[2] ?? null,
                 'definition' => $row[3] ?? null,
+                'user_id' => $validated['user_id']
             ]);
         }
 
