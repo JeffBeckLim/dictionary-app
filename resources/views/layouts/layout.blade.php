@@ -32,6 +32,26 @@ Master Layout
         }
     </style>
 </head>
+
+<!-- Global Reusable Confirmation Modal -->
+<div class="modal fade" id="globalConfirmModal" tabindex="-1" aria-labelledby="globalConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-success">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title" id="globalConfirmModalLabel">Confirm Action</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="globalConfirmMessage">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button id="globalConfirmYesBtn" type="button" class="btn btn-success">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body>
 
     {{-- Navbar --}}
@@ -94,4 +114,31 @@ Master Layout
     </footer>
 
 </body>
+<script>
+    function showConfirmationModal({ 
+        title = 'Confirm Action', 
+        message = 'Are you sure?', 
+        confirmButtonText = 'Yes', 
+        onConfirm = () => {}
+    }) {
+        const modal = new bootstrap.Modal(document.getElementById('globalConfirmModal'));
+        document.getElementById('globalConfirmModalLabel').innerText = title;
+        document.getElementById('globalConfirmMessage').innerText = message;
+        document.getElementById('globalConfirmYesBtn').innerText = confirmButtonText;
+
+        const confirmBtn = document.getElementById('globalConfirmYesBtn');
+
+        // Remove previous click handlers
+        const newButton = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newButton, confirmBtn);
+
+        newButton.addEventListener('click', () => {
+            modal.hide();
+            onConfirm(); // execute passed callback
+        });
+
+        modal.show();
+    }
+</script>
+
 </html>
