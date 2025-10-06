@@ -7,6 +7,7 @@ $(document).ready(function () {
     $search.on('keyup', function () {
         let query = $(this).val().trim();
 
+        
         if (query.length > 1) {
             $.ajax({
                 url: searchRoute,
@@ -49,7 +50,7 @@ $(document).ready(function () {
         let wordId = $(this).data('id');
         let word = $(this).text();
 
-        $search.val(word);
+        $search.val(word.trim());
         $suggestions.hide().html('');
 
         $.ajax({
