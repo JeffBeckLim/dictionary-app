@@ -28,4 +28,10 @@ class CreateController extends Controller
         // Redirect back with success message
         return redirect()->route('contribute')->with('success', 'Word added successfully!');
     }
+    public function edit($id)
+    {
+        $word = Word::findOrFail($id);
+        return view('pages.edit', compact('word'));
+    }
+
 }

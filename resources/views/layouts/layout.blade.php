@@ -56,6 +56,9 @@ Master Layout
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('import') }}">Import</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('manage') }}">Manage</a>
+                    </li>
                 </ul>
             </div>
         </div>

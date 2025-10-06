@@ -7,7 +7,8 @@ use App\Http\Controllers\{
     SearchController,
     CreateController,
     ImportController,
-    RecordAudioController
+    RecordAudioController,
+    ManageController
 };
 
 //**** HOME ROUTE ****
@@ -31,7 +32,12 @@ Route::get('/word/{id}', [SearchController::class, 'getWord'])->name('word.detai
 Route::get('/audio/{id}', [RecordAudioController::class, 'index'])->name('audio');
 Route::post('/word/{id}/save-recording', [RecordAudioController::class, 'saveRecording'])->name('word.save.recording');
 
-
+// **** WORD MANAGEMENT ROUTE ****
+Route::middleware(['auth'])->group(function () {
+    Route::get('/manage', [ManageController::class, 'index'])->name('manage');
+    Route::get('/word/{id}/edit', [ManageController::class, 'edit'])->name('word.edit');
+    Route::put('/word/{id}', [ManageController::class, 'update'])->name('word.update');
+});
 
 // **** AUTH ****
 
