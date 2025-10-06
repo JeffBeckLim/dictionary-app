@@ -8,7 +8,8 @@ use App\Http\Controllers\{
     CreateController,
     ImportController,
     RecordAudioController,
-    ManageController
+    ManageController,
+    Auth\RegisteredUserController
 };
 
 //**** HOME ROUTE ****
@@ -21,6 +22,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/word/store', [CreateController::class, 'store'])->name('word.store');
     Route::get('/word/import', [ImportController::class, 'index'])->name('import');
     Route::post('/word/import/store', [ImportController::class, 'import'])->name('word.import.store');
+
+    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+    Route::post('register', [RegisteredUserController::class, 'store']);
+
 });
 
 // **** WORD SEARCH ROUTE ****

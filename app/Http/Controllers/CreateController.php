@@ -19,8 +19,10 @@ class CreateController extends Controller
             'word' => 'required|string|max:255',
             'pronunciation' => 'nullable|string|max:255',
             'part_of_speech' => 'nullable|string|max:255',
-            'definition' => 'nullable|string',
+            'definition' => 'nullable|string'
         ]);
+
+        $validated['user_id'] = $request->user()->id;
 
         // Create the word in database
         Word::create($validated);

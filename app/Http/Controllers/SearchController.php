@@ -23,7 +23,11 @@ class SearchController extends Controller
 
     public function getWord($id)
     {
-        $word = Word::findOrFail($id);
+
+        $word = Word::with(['user'])->findOrFail($id);
+        $word->recording_path ? $word->recording_path = asset("storage/".$word->recording_path) : ''; // Convert to full URL
+
+
         return response()->json($word);
     }
     

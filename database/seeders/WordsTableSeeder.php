@@ -23,6 +23,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'verb',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'happy',
@@ -31,6 +32,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'adjective',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'book',
@@ -39,6 +41,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'noun',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'quickly',
@@ -47,6 +50,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'adverb',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'and',
@@ -55,6 +59,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'conjunction',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'under',
@@ -63,6 +68,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'preposition',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'blue',
@@ -71,6 +77,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'adjective',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'slowly',
@@ -79,6 +86,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'adverb',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'cat',
@@ -87,6 +95,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'noun',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'think',
@@ -95,6 +104,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'verb',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'beautiful',
@@ -103,6 +113,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'adjective',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'but',
@@ -111,6 +122,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'conjunction',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'above',
@@ -119,6 +131,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'preposition',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'dog',
@@ -127,6 +140,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'noun',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
         [
             'word' => 'eat',
@@ -135,6 +149,7 @@ class WordsTableSeeder extends Seeder
             'part_of_speech' => 'verb',
             'created_at' => now(),
             'updated_at' => now(),
+            'user_id' => 1,
         ],
     ]);
 

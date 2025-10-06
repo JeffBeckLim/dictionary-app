@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('part_of_speech')->nullable();
             $table->string('recording_path')->nullable();
            
-            
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+
             $table->timestamps();
         });
     }

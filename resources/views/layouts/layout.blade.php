@@ -62,6 +62,9 @@ Master Layout
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('manage') }}">Manage</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">+ Account</a>
+                    </li>
                     @auth
                         <li class="nav-item d-flex align-items-center">
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">

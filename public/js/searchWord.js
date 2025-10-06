@@ -45,49 +45,13 @@ $(document).ready(function () {
         }
     });
 
-    // Click suggestion → Fetch word details
-    $(document).on('click', '.suggestion-item', function () {
+    
+    // Click on suggested word → Fetch word details
+    $(document).on('click', '.suggested-word , .suggestion-item', function () {
         let wordId = $(this).data('id');
         let word = $(this).text();
 
         $search.val(word.trim());
-        $suggestions.hide().html('');
-
-        $.ajax({
-            url: wordDetailRoute.replace(':id', wordId),
-            type: "GET",
-            success: function (word) {
-                $wordDetails.html(`
-                    <div class="row justify-content-center mt-4">
-                        <div class="col-md-6">
-                            <div class="card border-success shadow-sm" style="background-color:#E2FED6;">
-                                <div class="card-body">
-                                    <h5 class="card-title text-success">
-                                        ${word.word}
-                                        ${word.pronunciation ? `<small class="text-muted">(${word.pronunciation})</small>` : ''}
-                                    </h5>
-                                    <p class="card-text">${word.definition}</p>
-                                    <span class="badge bg-success-subtle text-success fw-semibold text-capitalize">
-                                        ${word.part_of_speech}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `);
-            },
-            error: function () {
-                $wordDetails.html('<p class="text-danger">Failed to load word details.</p>');
-            }
-        });
-    });
-
-    // Click on suggested word → Fetch word details
-    $(document).on('click', '.suggested-word', function () {
-        let wordId = $(this).data('id');
-        let word = $(this).text();
-
-        $search.val(word);
         $suggestions.hide().html('');
 
         $.ajax({
@@ -108,25 +72,35 @@ $(document).ready(function () {
                                 
                                 <div class="card-body">
                                     <h5 class="card-title text-success">
-                                        ${word.word}
+                                        <span class="fw-bold fs-2">${word.word}</span>
                                         ${word.pronunciation ? `<small class="text-muted">(${word.pronunciation})</small>` : ''}
-                                        <button
-                                            id="play-pronunciation"
-                                            title="Play Pronunciation"
-                                            style="background: none; border: none; color: #198754; font-size: 1.2rem; cursor: pointer;"
-                                        >
-                                            🔊
-                                        </button>
+                                        ${word.recording_path ? 
+                                            `
+                                                <button
+                                                id="play-pronunciation"
+                                                data-audio="${word.recording_path} "
+                                                title="Play Pronunciation"
+                                                style="background: none; border: none; color: #198754; font-size: 1.2rem; cursor: pointer;"
+                                                >
+                                                    🔈
+                                                </button>
+                                            ` : 
+                                            '<small class="text-muted">🔇</small>'}
+                                        
                                     </h5>
                                     <p class="card-text">${word.definition}</p>
                                     <span class="badge bg-success-subtle text-success fw-semibold text-capitalize">
                                         ${word.part_of_speech}
                                     </span>
+                                    <br/>
+                                    <small class="mt-2 mb-0 text-muted">Added by: <strong>${word.user ? word.user.name : 'Unknown'}</strong></small>
+                                    <br/>
+                                    <small class="mt-2 mb-0 text-muted">Last updated: <strong>${new Date(word.updated_at).toLocaleDateString('en-US', { dateStyle: 'medium' })}</strong></small>
                                 </div>
                             </div>
                         </div>
                     </div>
-                `);
+                    `);
             },
             error: function () {
                 $wordDetails.html('<p class="text-danger">Failed to load word details.</p>');
@@ -149,7 +123,29 @@ $(document).ready(function () {
     });
 });
 
-function playAudio(audioPath){
+// Play pronunciation audio
+$(document).on('click', '#play-pronunciation', function () {
+    const audioPath = $(this).data('audio');
+
+    const $btn = $(this);
+
+    $btn.text('🔊');
+    
+    console.log('Audio Path:', audioPath); 
+    if (audioPath) {
+        playAudio(audioPath, $btn);
+    } else {
+        alert('No audio available for this word.');
+    }
+
+});
+
+function playAudio(audioPath, btn){
     let audio = new Audio(audioPath);
     audio.play();
+
+     audio.addEventListener('ended', () => {
+       console.log('Audio playback ended');
+       btn.text('🔈');
+    });
 }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="text-center mb-5">
-        <h2 class="display-6 fw-bold text-success">Create Your Account</h2>
+        <h2 class="display-6 fw-bold text-success">Create Account</h2>
         <p class="text-muted">Join us by filling out the form below</p>
     </div>
 
