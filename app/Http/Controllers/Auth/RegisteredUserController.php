@@ -28,7 +28,7 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
+    {   
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -47,4 +47,25 @@ class RegisteredUserController extends Controller
 
         return redirect(route('home', absolute: false));
     }
+
+    public function users()
+    {
+        $users = User::all();
+        return view('admin.manageUser', compact('users'));
+    }
+
+  public function update(Request $request, $id)
+{
+    $user = User::findOrFail($id);
+
+    $user->update([
+        'name' => $request->name,
+        'email' => $request->email,
+        'is_inactive' => $request->has('is_inactive') ? 1 : null,
+    ]);
+
+    return redirect()->back()->with('success', 'User updated successfully');
+}
+
+
 }

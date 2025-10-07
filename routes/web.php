@@ -26,7 +26,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
+
+
+    
 });
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('users', [RegisteredUserController::class, 'users'])->name('users');
+    Route::put('/users/{id}/update', [RegisteredUserController::class, 'update'])->name('users.update');
+});
+
+
 
 // **** WORD SEARCH ROUTE ****
 Route::get('/search', [SearchController::class, 'search'])->name('search');

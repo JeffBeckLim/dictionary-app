@@ -6,6 +6,10 @@
         <p class="text-muted">Join us by filling out the form below</p>
     </div>
 
+    <div class="text-center"> 
+        <a href="{{ route('users') }}" class="btn btn-outline-success mb-3">See All Users →</a>
+    </div>
+
     <div class="mx-auto" style="max-width: 500px;">
         <form method="POST" action="{{ route('register') }}" class="border p-4 rounded shadow-sm">
             @csrf

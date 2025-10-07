@@ -19,6 +19,11 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            // Custom additions can go here:
+            $table->string('role')->nullable(); // e.g., 'null', or 'admin'
+            $table->integer('is_inactive')->nullable(); // if == 1 : user is inactive;
+
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
