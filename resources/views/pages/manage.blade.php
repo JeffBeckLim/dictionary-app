@@ -62,11 +62,18 @@
                                     @endif
                                 </td>
                                 <td class="text-start">
-                                    <a href="{{ route('word.edit', $word->id) }}" class="btn btn-sm btn-success mb-1">Edit Word</a>
-                                    
-                                    <a href="{{ route('audio', $word->id) }}" class="btn btn-sm btn-outline-success mb-1">
+                                    <a href="{{ route('word.edit', $word->id) }}" class="btn btn-xs btn-success mb-1">Edit Word</a>
+
+                                    <a href="{{ route('audio', $word->id) }}" class="btn btn-xs btn-outline-success mb-1">
                                         {{ $word->recording_path ? 'Update Recording' : 'Add Recording' }}
                                     </a>
+                                    
+                                    <form action="{{ route('word.destroy', $word->id) }}" method="POST" class="d-inline" onsubmit="return confirmDelete(event, '{{ $word->word }}')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-xs btn-outline-danger">Delete</button>
+                                    </form>
+
                                 </td>
                             </tr>
                         @endforeach
@@ -82,6 +89,12 @@
         </div>
     </div>
     <style>
+    .btn-xs {
+        font-size: 0.75rem;
+        padding: 0.15rem 0.4rem;
+        line-height: 1.4;
+        border-radius: 0.2rem;
+    }
     .pagination .page-link {
         color: #198754; 
         border-color: #198754;
@@ -102,6 +115,22 @@
         const input = document.getElementById('search-input');
         const suggestionsBox = document.getElementById('search-suggestions');
 
+        function confirmDelete(event, wordName = '') {
+            event.preventDefault();
+
+            const form = event.target;
+
+            showConfirmationModal({
+                title: 'Delete Word',
+                message: `Are you sure you want to delete the word "${wordName}"? This action cannot be undone.`,
+                confirmButtonText: 'Yes, Delete',
+                onConfirm: () => form.submit()
+            });
+
+            return false;
+        }
+
+        
         input.addEventListener('input', function () {
             const query = this.value.trim();
 

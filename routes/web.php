@@ -9,11 +9,15 @@ use App\Http\Controllers\{
     ImportController,
     RecordAudioController,
     ManageController,
+    AboutController,
     Auth\RegisteredUserController
 };
 
 //**** HOME ROUTE ****
 Route::get('/', [WordController::class, 'index'])->name('home');
+
+// **** ABOUT ROUTE ****
+Route::get('/about', [AboutController::class, 'index'])->name('about');
 
 
 Route::middleware(['auth'])->group(function () {
@@ -52,6 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manage', [ManageController::class, 'index'])->name('manage');
     Route::get('/word/{id}/edit', [ManageController::class, 'edit'])->name('word.edit');
     Route::put('/word/{id}', [ManageController::class, 'update'])->name('word.update');
+    Route::delete('/words/{word}', [WordController::class, 'destroy'])->name('word.destroy');
 });
 
 // **** AUTH ****

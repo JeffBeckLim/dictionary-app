@@ -79,9 +79,12 @@ Master Layout
                         <a class="nav-link {{ Route::is('contribute') ? 'fw-bold text-success' : '' }}" href="{{ route('contribute') }}">Contribute</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ Route::is('import') ? 'fw-bold text-success' : '' }}" href="{{ route('import') }}">Import</a>
+                        <a class="nav-link {{ Route::is('about') ? 'fw-bold text-success' : '' }}" href="{{ route('about') }}">About Us</a>
                     </li>
                     @auth
+                    <li class="nav-item">
+                        <a class="nav-link {{ Route::is('import') ? 'fw-bold text-success' : '' }}" href="{{ route('import') }}">Import</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link {{ Route::is('manage') ? 'fw-bold text-success' : '' }}" href="{{ route('manage') }}">Manage</a>
                     </li>

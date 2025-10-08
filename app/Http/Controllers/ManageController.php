@@ -20,8 +20,11 @@ class ManageController extends Controller
                   ->orWhere('definition', 'like', '%' . $search . '%');
         }
 
-        // Paginate results (10 per page)
-        $words = $query->latest()->paginate(5);
+        // Paginate results (5 per page)
+        // $words = $query->latest()->paginate(5);
+        $words = $query->orderBy('word', 'asc')->paginate(5);
+
+
 
         // Preserve search query in pagination links
         $words->appends(['search' => $search]);
